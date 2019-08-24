@@ -1,0 +1,37 @@
+<!--pages/classic/classic.wxml-->
+<view class="container">
+  <view class="header">
+    <v-epsoide class="epsoide" index="{{classicData.index}}" />
+    <v-like 
+      class="like"
+      like="{{likeStatus}}" 
+      count="{{likeCount}}"
+      bind:like="onLike"
+    />
+  </view>
+  <v-movie 
+    img="{{classicData.image}}" 
+    content="{{classicData.content}}" 
+    hidden="{{classicData.type != 100}}"
+  />
+  <v-music 
+    img="{{classicData.image}}" 
+    content="{{classicData.content}}" 
+    wx:if="{{classicData.type == 200}}"
+    src="{{classicData.url}}"
+    title="{{classicData.title}}"
+  />
+  <v-essay 
+    img="{{classicData.image}}" 
+    content="{{classicData.content}}" 
+    hidden="{{classicData.type != 300}}"
+  />
+  <v-navi 
+    class="navi"
+    title="{{classicData.title}}"
+    latest="{{latest}}"
+    first="{{first}}"
+    bind:left="onNext"
+    bind:right="onPrevious"
+  />
+</view>

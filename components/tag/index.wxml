@@ -1,0 +1,5 @@
+<!--短评小标签组件-->
+<view bind:tap="onTap" class="container tag-class">
+  <text>{{text}}</text>
+  <slot name="after"></slot>
+</view>
