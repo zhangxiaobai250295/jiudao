@@ -25,7 +25,7 @@
           <block wx:for="{{historyWord}}" wx:key="index" >
             <v-tag bind:tapping="onConfirm" text="{{item}}" class="tag-cmp"/>
           </block>
-        </view>
+      </view>
     </view>
 
     <view class="history hot-search">

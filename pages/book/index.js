@@ -11,18 +11,28 @@ Page({
    */
   data: {
     books: [],
-    searching: false,
+    searching: false,         // 规定了是否呈现搜索页面还是book的首页
     more: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    bookModel.getHostList().then((res) => {
-      this.setData({
-        books: res
-      })
+  // onLoad: async function (options) {
+  //   const books = await bookModel.getHostList()
+  //     // .then((res) => {    从promise改写成 async 和await的形式
+  //     //   this.setData({    或者使用es6的简写 不要写function
+  //     //     books: res
+  //     //   })
+  //     // })
+  // },
+   /**
+   * 生命周期函数--监听页面加载
+   */
+  async onLoad(options){
+    const books = await bookModel.getHostList()
+    this.setData({
+      books
     })
   },
   onSearching: function(event){

@@ -43,8 +43,8 @@ class BookModel extends HTTP{
     return this.request({
       url: 'book/search?summary=1',
       data:{
-        q:q,
-        start: start
+        q:q,                // 搜索内容,比如你想搜索python相关书籍,则输入python
+        start: start        // 开始记录数，默认为0
       }
     })
   }

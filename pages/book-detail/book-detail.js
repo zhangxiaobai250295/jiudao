@@ -26,8 +26,8 @@ Page({
     })
     const bid = options.bid
     // 得到三个promise对象
-    const detail = bookModel.getDetail(bid)    // 详情信息
-    const comments = bookModel.getComments(bid)   // 短评信息
+    const detail = bookModel.getDetail(bid)           // 详情信息
+    const comments = bookModel.getComments(bid)       // 短评信息
     const likeStatus = bookModel.getLikeStatus(bid)   // 点赞信息
    
     Promise.all([detail, comments, likeStatus])

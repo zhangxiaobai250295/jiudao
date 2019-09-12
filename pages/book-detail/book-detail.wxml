@@ -12,6 +12,7 @@
     <text class="shadow" wx:if="{{comments==false}}">还没有短评</text>
     <view class="comment-container">
       <block wx:for="{{util.limit(comments, 15)}}" wx:key="index">
+        <!-- tool.highlight(index) 是底部定义的wxs v-tag组件定义了一个外部样式 -->
         <v-tag text="{{item.content}}" tag-class="{{tool.highlight(index)}}">
            <text class="num" slot="after">{{'+'+item.nums}}</text>
         </v-tag>
@@ -71,7 +72,7 @@
   </view>
   <input bindconfirm="onPost" class="post" placeholder="短评最多12个字"></input>
 </view>
-<v-mask wx:if="{{posting}}"/>
+<v-mask wx:if="{{posting}}"/>   <!-- 遮罩 -->
 
 <wxs module="tool">
   var highlight = function(index){

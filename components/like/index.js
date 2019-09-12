@@ -13,6 +13,9 @@ Component({
     count: {
       type: Number,
       value: 0
+    },
+    readOnly:{
+      type:Boolean
     }
   },
 
@@ -29,6 +32,9 @@ Component({
    */
   methods: {
     onLike: function(event) {
+      if(this.properties.readOnly){   // 是否能点击  在my的页面中该组件不能被点击
+        return
+      }
       let like = this.properties.like
       let count = this.properties.count
 

@@ -5,6 +5,8 @@
     "v-music": "/components/classic/music/index",
     "v-essay": "/components/classic/essay/index",
     "v-epsoide": "/components/classic/epsoide/index",
-    "v-navi": "/components/navi/index"
+    "v-navi": "/components/navi/index",
+    "v-button": "/components/image-button/index",
+    "l-button": "/miniprogram_npm/lin-ui/button/index"
   }
 }

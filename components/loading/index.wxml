@@ -1,4 +1,5 @@
 <!--components/loading/index.wxml-->
+<!-- 搜索组件中加载更多的动画 -->
 <view class="spinner">
   <view class="double-bounce1"></view>
   <view class="double-bounce2"></view>

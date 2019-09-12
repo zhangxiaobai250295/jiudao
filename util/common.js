@@ -8,5 +8,20 @@ const random = function generateMixed(n){  // n表示要生成字符串的位数
   }
   return res
 }
+const promisic = function (func) {
+  return function (params = {}) {
+    return new Promise((resolve, reject) => {
+      const args = Object.assign(params, {
+        success: (res) => {
+          resolve(res)
+        },
+        fail: (error) => {
+          reject(error)
+        }
+      })
+      func(args)
+    })
+  }
+}
 
-export {random}
+export { random, promisic}

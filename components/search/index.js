@@ -25,12 +25,12 @@ Component({
     historyWords: [],
     hotWord: [],
     // searchData: [],                  // 公共的行为已经定义了  会覆盖掉这个
-    searching: false,
+    searching: false,                   // 点击搜索后  历史记录和热门搜索要被隐藏
     q: '',
     // loading:  false,                 // 公共的行为已经定义了  会覆盖掉这个 是否在加载更多的数据
     loadingCenter: false
   },
-  attached(){
+  attached(){                           // 组件实例进入页面节点树执行(组件的生命周期函数)
     const historyWord = keywordModel.getHistory()
     const hotWord = keywordModel.getHot()
     this.setData({
@@ -57,15 +57,16 @@ Component({
       // 解决2：当请求服务器返回的数据是一个null或者是个空数组时，下一次则不再像服务器发请求（问题：可能某次因为网络的原因而引起的返回数据是空，与我们的需求不符合）
       
 
-      if (!this.data.q) {                   // 当我们有搜索条件的时候才执行下面的代码
+      if (!this.data.q) {                  // 当我们有搜索条件的时候才执行下面的代码
         return
       }
       if(this.isLcked()){                  // 是否上了锁  
-        return                              // 如果在执行请求 则不执行下面的代码
+        return                             // 如果在执行请求 则不执行下面的代码
       }
       this.locked()                        // 执行来到这里,则表示之前没有在执行搜索  加锁
-                                            // this.data.loading = true 如果这样设置值  wxml不会更新该值  而如果wxml并没有绑定（用到）该值，也是可以这么设置的
-      if(this.hasMore()){
+                                           // this.data.loading = true 如果这样设置值  wxml不会更新该值  而如果wxml并没有绑定（用到）该值，也是可以这么设置的
+      if(this.hasMore()){                  // 调用公共行为,查看服务器是否还有数据
+        // this.getCurrentStart() => 获取请求搜索的起始记录数
         bookModel.search(this.getCurrentStart(), this.data.q).then(res => {
           this.setMoreData(res.books)
           this.unLocked()                  // 释放锁
@@ -74,28 +75,30 @@ Component({
         })
       }
     },
-    onDelete(event){
+    onDelete(event){                  // 点击输入框中的“x”按钮时的事件处理函数
       this.initialize()               // 调用公共行为的初始化方法
-      this._closeResult()
+      this._closeResult()             // 隐藏搜索结果的页面
     },
-    onCancel(event){
+    onCancel(event){                  // 点击取消按钮时的事件处理函数
       this.initialize()               // 调用公共行为的初始化方法
-      this.triggerEvent('cancel')
+      this.triggerEvent('cancel')     // 触发一个cancel事件  让父组件来决定事件的功能(关闭整个搜索页面)
     },
     onConfirm(event){
+      // event.detail.value => 输入框的内容
+      // event.detail.text => 点击历史记录或者热门搜索的内容
       const q = event.detail.value || event.detail.text           // 取到用户要搜索的信息
       this.setData({                // input的value绑定了q(数据的双向绑定) 所以在这给q赋值
         q: q
       })
-      this._showLoadingCenter()
+      this._showLoadingCenter()       // 显示加载动画
       this._showResult()              // 显示搜索结果页面
      
       bookModel.search(0, q).then(res => {                  
-        this.setMoreData(res.books)   // 调用公共行为的方法
-        this.setTotal(res.total)
+        this.setMoreData(res.books)   // 调用公共行为的方法  把新获取的数据添加到老的图书数据中
+        this.setTotal(res.total)      // 调用公共行为的方法  设置数据的总个数 以便知道有没有必要搜索时再去请求数据
 
-        keywordModel.addToHistory(q) // 把q添加到历史搜索记录的数组中去
-        this._hideLoadingCenter()
+        keywordModel.addToHistory(q) // 搜索成功后，证明该值有数据，把q添加到历史搜索记录的数组中去
+        this._hideLoadingCenter()    // 关闭加载的动画
       })
     },
     _showResult(){                   // 显示搜索结果的页面
@@ -109,12 +112,12 @@ Component({
         q: ''                        // 重置搜索输入框的文本
       })
     },
-    _showLoadingCenter(){               //显示加载动画
+    _showLoadingCenter(){            //显示加载动画
       this.setData({
         loadingCenter: true
       })
     },
-    _hideLoadingCenter() {               //关闭加载动画
+    _hideLoadingCenter() {           //关闭加载动画
       this.setData({
         loadingCenter: false
       })

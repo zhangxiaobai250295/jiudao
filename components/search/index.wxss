@@ -85,7 +85,7 @@
   width: 10rpx;
   background-color: #000;
   display: inline-block;
- margin-right: 20rpx;
+  margin-right: 20rpx;
 }
 .tags {
  display: flex;

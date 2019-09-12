@@ -1,4 +1,5 @@
 <!--components/navi/index.wxml-->
+<!-- 首页(classic)下方的左右切换期刊的按钮 -->
 <view class="container">
   <image bind:tap="onLeft" class="icon" src="{{latest?disLeftSrc:leftSrc}}" />
   <text class="title">{{title}}</text>

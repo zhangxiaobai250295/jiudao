@@ -24,7 +24,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    classicModel.getLatest((res) => {
+    classicModel.getLatest((res) => {  // 获取最新期刊的数据
+      console.log(res)
       this.setData({
         classicData: res,
         likeCount: res.fav_nums,

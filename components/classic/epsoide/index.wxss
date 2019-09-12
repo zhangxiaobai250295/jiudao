@@ -23,6 +23,8 @@
   margin-right: 14rpx;
   margin-bottom: 2rpx;
   border-left: 1px solid black;
+  /* width: 1px;
+  background-color: black; */
 }
 .date-container{
   display: flex;

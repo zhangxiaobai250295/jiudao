@@ -19,15 +19,15 @@ class KeywordModel extends HTTP{
 
   addToHistory(keyword){         // 把搜索的信息添加到缓存中  其实这种实现的方法是一种队列
     let words = this.getHistory()
-    const has = words.includes(keyword)
+    const has = words.includes(keyword)  // 查看keyword是否已经在words中存在
 
     if(!has){
       // 判断添加的内容是否超过规定的数组长度  超过 把原先数组的末尾元素删除 再把刚刚搜索的元素添加到数组的第一位
       const length = words.length
       if(length >= this.maxLength){
-        words.pop()
+        words.pop()             // 删除最后一个元素并返回该元素
       }
-      words.unshift(keyword)
+      words.unshift(keyword)    // 在数组的最前面插入元素
       wx.setStorageSync(this.key, words)
     }
   }

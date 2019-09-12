@@ -1,3 +1,5 @@
+// 书籍搜索模块的公共js
+
 const paginationBev = Behavior({
   data:{
     searchData: [],
@@ -40,17 +42,17 @@ const paginationBev = Behavior({
         loading: false
       })
     },
-    isLcked() {                       // 是否上了锁
+    isLcked() {                       // 是否上了锁   loading控制着锁的打开和释放 同时 控制着底部加载动画的显隐
       return this.data.loading ? true : false
     },
-    locked() {                        // 加锁
+    locked() {                        // 加锁     发送数据请求
       this.setData({
-        loading: true
+        loading: true                 // 显示底部的加载动画
       })
     },
-    unLocked() {                      // 释放锁
+    unLocked() {                      // 释放锁   数据请求回来了
       this.setData({
-        loading: false
+        loading: false                // 隐藏底部的加载动画
       })
     }
   }

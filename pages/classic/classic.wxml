@@ -2,35 +2,24 @@
 <view class="container">
   <view class="header">
     <v-epsoide class="epsoide" index="{{classicData.index}}" />
-    <v-like 
-      class="like"
-      like="{{likeStatus}}" 
-      count="{{likeCount}}"
-      bind:like="onLike"
-    />
+    <view class="like-container">
+      <v-like class="like" like="{{likeStatus}}" count="{{likeCount}}" bind:like="onLike"/>
+      <!-- <v-button class="share-btn" open-type="share">
+        <image src="/images/icon/share.png" class="share" slot="img"></image>
+      </v-button> -->
+      <!-- 使用lin-ui改写分享按钮 -->
+      <l-button special="{{true}}" open-type="share" l-class="share-btn">
+        <image src="/images/icon/share.png" class="share" ></image>
+      </l-button>
+    </view>
   </view>
-  <v-movie 
-    img="{{classicData.image}}" 
-    content="{{classicData.content}}" 
-    hidden="{{classicData.type != 100}}"
+  <v-movie img="{{classicData.image}}" content="{{classicData.content}}" hidden="{{classicData.type != 100}}"/>
+  <v-music img="{{classicData.image}}" content="{{classicData.content}}" wx:if="{{classicData.type == 200}}"
+           src="{{classicData.url}}"
+           title="{{classicData.title}}"
   />
-  <v-music 
-    img="{{classicData.image}}" 
-    content="{{classicData.content}}" 
-    wx:if="{{classicData.type == 200}}"
-    src="{{classicData.url}}"
-    title="{{classicData.title}}"
-  />
-  <v-essay 
-    img="{{classicData.image}}" 
-    content="{{classicData.content}}" 
-    hidden="{{classicData.type != 300}}"
-  />
-  <v-navi 
-    class="navi"
-    title="{{classicData.title}}"
-    latest="{{latest}}"
-    first="{{first}}"
+  <v-essay img="{{classicData.image}}" content="{{classicData.content}}" hidden="{{classicData.type != 300}}"/>
+  <v-navi class="navi" title="{{classicData.title}}" latest="{{latest}}" first="{{first}}"
     bind:left="onNext"
     bind:right="onPrevious"
   />
